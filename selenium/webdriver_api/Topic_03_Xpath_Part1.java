@@ -101,6 +101,9 @@ public class Topic_03_Xpath_Part1 {
 		
 		String boxContent = driver.findElement(By.xpath("//p[contains(.,'thaotest@yopmail.com')]")).getText();
 		Assert.assertTrue(boxContent.contains(email));
+		String boxTitle = driver.findElement(By.xpath("//div[@class='box-content']//p[contains(.,'Thao Luu')]")).getText();
+		Assert.assertTrue(boxTitle.contains(firstname));
+		Assert.assertTrue(boxTitle.contains(lastname));
 	}
 		
 
