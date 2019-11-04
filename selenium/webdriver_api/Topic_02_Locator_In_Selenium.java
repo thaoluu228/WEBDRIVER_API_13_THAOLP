@@ -43,18 +43,16 @@ public class Topic_02_Locator_In_Selenium {
 		
 		//LINKTEXT
 		driver.findElement(By.linkText("ORDERS AND RETURNS")).click();
-		
-		
+			
 	}
 	
-
 	@Test
 	public void TC_02_CSS() {
 		
 		driver.findElement(By.cssSelector("input[name='oar_order_id']")).sendKeys("thaotest@gmail.com");
 		driver.findElement(By.cssSelector("#oar_billing_lastname")).sendKeys("THAO");
 		driver.findElement(By.cssSelector("#oar_email")).sendKeys("testing@gmail.com");
-		System.out.println("The a dung css = " + driver.findElement(By.cssSelector("a")).getSize());
+		System.out.println("The a dung css = " + driver.findElements(By.cssSelector("a")).size());
 		driver.findElement(By.cssSelector("a[href='http://live.demoguru99.com/index.php/catalogsearch/advanced/']")).click();
 	}
 
@@ -63,7 +61,7 @@ public class Topic_02_Locator_In_Selenium {
 		driver.findElement(By.xpath("//input[@id='name']")).sendKeys("THAO");
 		driver.findElement(By.xpath("//input[@id='description']")).sendKeys("testingxpath");
 		driver.findElement(By.xpath("//input[@name='sku']")).sendKeys("ANK-1234");
-		System.out.println("The a dung xpath = " + driver.findElement(By.xpath("//a")).getSize());
+		System.out.println("The a dung xpath = " + driver.findElements(By.xpath("//a")).size());
 		driver.findElement(By.xpath("//a[text()='About Us']")).click();	
 	}
 

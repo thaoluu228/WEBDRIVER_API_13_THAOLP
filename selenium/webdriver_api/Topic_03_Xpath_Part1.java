@@ -31,7 +31,7 @@ public class Topic_03_Xpath_Part1 {
 		driver.findElement(By.xpath("//div[@class='footer']//a[text()='My Account']")).click();
 	}
 
-	@Test
+	
 	public void TC_01_LoginWithEmailandPasswordEmpty() {
 		driver.findElement(By.xpath("//input[@id='email']")).sendKeys("");
 		driver.findElement(By.xpath("//input[@id='pass']")).sendKeys("");
@@ -45,7 +45,7 @@ public class Topic_03_Xpath_Part1 {
 
 	}
 
-	@Test
+	
 	public void TC_02_LoginwithEmailInvalid() {
 		driver.findElement(By.xpath("//input[@id='email']")).sendKeys("1234@4356.678");
 		driver.findElement(By.xpath("//input[@id='pass']")).sendKeys("");
@@ -59,7 +59,7 @@ public class Topic_03_Xpath_Part1 {
 		
 	}
 
-	@Test
+	
 	public void TC_03_LoginwithPasswordLessthan6Char() {
 		driver.findElement(By.xpath("//input[@id='email']")).sendKeys("thaotest@yopmail.com");
 		driver.findElement(By.xpath("//input[@id='pass']")).sendKeys("12345");
@@ -72,7 +72,7 @@ public class Topic_03_Xpath_Part1 {
 	}
 	
 	
-	@Test
+	
 	public void TC_04_LoginwithPasswordIncorrect() {
 		driver.findElement(By.xpath("//input[@id='email']")).sendKeys("thaotest@yopmail.com");
 		driver.findElement(By.xpath("//input[@id='pass']")).sendKeys("123457");
@@ -95,13 +95,14 @@ public class Topic_03_Xpath_Part1 {
 		Assert.assertEquals(successMsg, "MY DASHBOARD");
 		
 		String welcomeMsg = driver.findElement(By.xpath("//div[@class='welcome-msg']//strong[starts-with(text(),'Hello')]")).getText();
-		System.out.println("Text = " + welcomeMsg);
+		System.out.println("Text1 = " + welcomeMsg);
 		Assert.assertTrue(welcomeMsg.contains(firstname));
 		Assert.assertTrue(welcomeMsg.contains(lastname));
 		
 		String boxContent = driver.findElement(By.xpath("//p[contains(.,'thaotest@yopmail.com')]")).getText();
 		Assert.assertTrue(boxContent.contains(email));
 		String boxTitle = driver.findElement(By.xpath("//div[@class='box-content']//p[contains(.,'Thao Luu')]")).getText();
+		System.out.println("Text2 = " + boxTitle);
 		Assert.assertTrue(boxTitle.contains(firstname));
 		Assert.assertTrue(boxTitle.contains(lastname));
 	}
