@@ -31,7 +31,7 @@ public class Topic_03_Xpath_Part1 {
 		driver.findElement(By.xpath("//div[@class='footer']//a[text()='My Account']")).click();
 	}
 
-	
+	@Test
 	public void TC_01_LoginWithEmailandPasswordEmpty() {
 		driver.findElement(By.xpath("//input[@id='email']")).sendKeys("");
 		driver.findElement(By.xpath("//input[@id='pass']")).sendKeys("");
@@ -45,7 +45,7 @@ public class Topic_03_Xpath_Part1 {
 
 	}
 
-	
+	@Test
 	public void TC_02_LoginwithEmailInvalid() {
 		driver.findElement(By.xpath("//input[@id='email']")).sendKeys("1234@4356.678");
 		driver.findElement(By.xpath("//input[@id='pass']")).sendKeys("");
@@ -59,7 +59,7 @@ public class Topic_03_Xpath_Part1 {
 		
 	}
 
-	
+	@Test
 	public void TC_03_LoginwithPasswordLessthan6Char() {
 		driver.findElement(By.xpath("//input[@id='email']")).sendKeys("thaotest@yopmail.com");
 		driver.findElement(By.xpath("//input[@id='pass']")).sendKeys("12345");
@@ -72,7 +72,7 @@ public class Topic_03_Xpath_Part1 {
 	}
 	
 	
-	
+	@Test
 	public void TC_04_LoginwithPasswordIncorrect() {
 		driver.findElement(By.xpath("//input[@id='email']")).sendKeys("thaotest@yopmail.com");
 		driver.findElement(By.xpath("//input[@id='pass']")).sendKeys("123457");
