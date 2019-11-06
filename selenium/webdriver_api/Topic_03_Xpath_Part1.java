@@ -1,5 +1,6 @@
 package webdriver_api;
 
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -14,9 +15,9 @@ import org.testng.annotations.Test;
 public class Topic_03_Xpath_Part1 {
 	//khai bao 1 bien driver dai dien cho selenium webdriver
 	WebDriver driver;
-	String firstname = "Thao";
-	String lastname = "Luu";
-	String email = "thaotest@yopmail.com";
+	String firstname = "Luu";
+	String lastname = "Thao";
+	String email = "thaotest" + randomNumber() + "@yopmail.com";
 	
 	@BeforeClass
 	public void beforeClass() {
@@ -61,7 +62,7 @@ public class Topic_03_Xpath_Part1 {
 
 	@Test
 	public void TC_03_LoginwithPasswordLessthan6Char() {
-		driver.findElement(By.xpath("//input[@id='email']")).sendKeys("thaotest@yopmail.com");
+		driver.findElement(By.xpath("//input[@id='email']")).sendKeys(email);
 		driver.findElement(By.xpath("//input[@id='pass']")).sendKeys("12345");
 		driver.findElement(By.xpath("//button[@id='send2']")).click();
 
@@ -84,30 +85,54 @@ public class Topic_03_Xpath_Part1 {
 		
 	}
 	
+	public int randomNumber() {
+	Random rand = new Random();
+	int value = rand.nextInt(1000);
+	return value;
+	}
+	
+	
 	@Test
-	public void TC_05_LoginwithEmailandPasswordCorrect() {
-		driver.findElement(By.xpath("//input[@id='email']")).sendKeys("thaotest@yopmail.com");
+	public void TC_05_CreatAccount() {
+		driver.findElement(By.xpath("//a[@class='button']")).click();
+		
+		System.out.println("Random Email = " + email);
+		
+		driver.findElement(By.xpath("//input[@id='firstname']")).sendKeys(firstname);
+		driver.findElement(By.xpath("//input[@id='lastname']")).sendKeys(lastname);
+		driver.findElement(By.xpath("//input[@id='email_address']")).sendKeys(email);
+		driver.findElement(By.xpath("//input[@id='password']")).sendKeys("123456");
+		driver.findElement(By.xpath("//input[@id='confirmation']")).sendKeys("123456");
+		driver.findElement(By.xpath("//button[@title='Register']")).click();
+		
+		Assert.assertTrue(driver.findElement(By.xpath("//li[@class='success-msg']//span[text()='Thank you for registering with Main Website Store.']")).isDisplayed());
+		Assert.assertEquals(driver.findElement(By.xpath("//h1")).getText(), "MY DASHBOARD");
+		Assert.assertTrue(driver.findElement(By.xpath("//strong[text()='Hello, " + firstname + " " + lastname + "!']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//p[contains(.,'" + email + "')]")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//div[@class='box-content']//p[contains(text(), '" + firstname + " " + lastname + "')]")).isDisplayed());
+		
+		driver.findElement(By.xpath("//div[@class='account-cart-wrapper']//span[text()='Account']")).click();
+		
+		driver.findElement(By.xpath("//a[@title='Log Out']")).click();
+	}
+	
+	
+	@Test
+	public void TC_06_LoginwithEmailandPasswordCorrect() {
+		driver.findElement(By.xpath("//input[@id='email']")).sendKeys(email);
 		driver.findElement(By.xpath("//input[@id='pass']")).sendKeys("123456");
 		driver.findElement(By.xpath("//button[@id='send2']")).click();
 
+		Assert.assertEquals(driver.findElement(By.xpath("//h1")).getText(), "MY DASHBOARD");	
 		
-		String successMsg = driver.findElement(By.xpath("//div[@class='dashboard']//h1")).getText();
-		Assert.assertEquals(successMsg, "MY DASHBOARD");
+		Assert.assertTrue(driver.findElement(By.xpath("//strong[text()='Hello, " + firstname + " " + lastname + "!']")).isDisplayed());
+	
+		Assert.assertTrue(driver.findElement(By.xpath("//p[contains(.,'" + email + "')]")).isDisplayed());
 		
-		String welcomeMsg = driver.findElement(By.xpath("//div[@class='welcome-msg']//strong[starts-with(text(),'Hello')]")).getText();
-		System.out.println("Text1 = " + welcomeMsg);
-		Assert.assertTrue(welcomeMsg.contains(firstname));
-		Assert.assertTrue(welcomeMsg.contains(lastname));
+		Assert.assertTrue(driver.findElement(By.xpath("//div[@class='box-content']//p[contains(text(),'" + firstname + " " + lastname + "')]")).isDisplayed());
 		
-		String boxContent = driver.findElement(By.xpath("//p[contains(.,'thaotest@yopmail.com')]")).getText();
-		Assert.assertTrue(boxContent.contains(email));
-		String boxTitle = driver.findElement(By.xpath("//div[@class='box-content']//p[contains(.,'Thao Luu')]")).getText();
-		System.out.println("Text2 = " + boxTitle);
-		Assert.assertTrue(boxTitle.contains(firstname));
-		Assert.assertTrue(boxTitle.contains(lastname));
 	}
 		
-
 	@AfterClass
 	public void afterClass() {
 		driver.quit();
