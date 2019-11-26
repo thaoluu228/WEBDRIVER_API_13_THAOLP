@@ -21,11 +21,11 @@ public class Topic_06_Textbox_TextArea {
 	//Input in new Customer/Output data
 	String customerName = "Thao Luu";
 	String gender = "female";
-	String DOB = "1996-10-03";
-	String address = "123Cau Giay";
+	String DOB = "1996-10-22";
+	String address = "Cau Giay";
 	String city = "Hanoi";
 	String state = "Dich Vong";
-	String pin = "123456";
+	String pin = "333555";
 	String mobile = "1256478";
 	String email = "thaoluu" + randomNumber() + "@yopmail.com";
 	
@@ -34,7 +34,7 @@ public class Topic_06_Textbox_TextArea {
 	String cityEdit = "Hatay";
 	String stateEdit = "Chuong My";
 	String pinEdit = "444777";
-	String mobileEdit = "14788493";
+	String mobileEdit = "14788679";
 	String emailEdit = "thaoluu" + randomNumber() + "@yopmail.com";
 	
 	//Locator for New/Edit Customer
