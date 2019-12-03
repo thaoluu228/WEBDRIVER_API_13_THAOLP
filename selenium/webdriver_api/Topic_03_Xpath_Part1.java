@@ -85,12 +85,6 @@ public class Topic_03_Xpath_Part1 {
 		
 	}
 	
-	public int randomNumber() {
-	Random rand = new Random();
-	int value = rand.nextInt(1000);
-	return value;
-	}
-	
 	
 	@Test
 	public void TC_05_CreatAccount() {
@@ -137,5 +131,12 @@ public class Topic_03_Xpath_Part1 {
 	public void afterClass() {
 		driver.quit();
 	}
+	
+	public int randomNumber() {
+		Random rand = new Random();
+		int value = rand.nextInt(1000);
+		return value;
+		}
+		
 
 }
