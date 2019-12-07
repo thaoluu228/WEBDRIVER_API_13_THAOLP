@@ -2,6 +2,7 @@ package webdriver_api;
 
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -16,6 +17,7 @@ public class Topic_08_Button_Radio_Checkbox {
 	//khai bao 1 bien driver dai dien cho selenium webdriver
 	WebDriver driver;
 	JavascriptExecutor javascript;
+	Alert alert;
 	
 	@BeforeClass
 	public void beforeClass() {
@@ -25,7 +27,7 @@ public class Topic_08_Button_Radio_Checkbox {
 		driver.manage().window().maximize();
 	}
 
-	
+	@Test
 	public void TC_01_Javascript() {
 		driver.get("http://live.demoguru99.com/");
 		clickElementbyJavasript(By.xpath("//div[@class='footer']//a[@title='My Account']"));
@@ -34,7 +36,7 @@ public class Topic_08_Button_Radio_Checkbox {
 		Assert.assertEquals(driver.getCurrentUrl(), "http://live.demoguru99.com/index.php/customer/account/create/");
 	}
 
-	
+	@Test
 	public void TC_02_Checkbox() {
 		driver.get("https://demos.telerik.com/kendo-ui/styling/checkboxes");
 		String checkboxInput = "//label[text()='Dual-zone air conditioning']/preceding-sibling::input";
@@ -43,7 +45,6 @@ public class Topic_08_Button_Radio_Checkbox {
 		clickElementbyJavasript(By.xpath(checkboxInput));
 		Assert.assertFalse(isElementSelected(By.xpath(checkboxInput)));
 	}
-
 	@Test
 	public void TC_03_Radiobutton() {
 		driver.get("https://demos.telerik.com/kendo-ui/styling/radios");
@@ -54,7 +55,36 @@ public class Topic_08_Button_Radio_Checkbox {
 		Assert.assertTrue(isElementSelected(By.xpath(checkboxCarInput)));
 		
 	}
+	@Test
+	public void TC_04_AcceptAlert() throws InterruptedException {
+		driver.get("https://automationfc.github.io/basic-form/index.html");
+		driver.findElement(By.xpath("//button[text()='Click for JS Alert']")).click();
+		alert = driver.switchTo().alert();
+		Assert.assertEquals(alert.getText(), "I am a JS Alert");
+		alert.accept();
+		Thread.sleep(2000);
+		Assert.assertTrue(driver.findElement(By.xpath("//p[@id='result' and text()='You clicked an alert successfully ']")).isDisplayed());
+	}
+	@Test
+	public void TC_05_CancelAlert() throws InterruptedException {
+		driver.findElement(By.xpath("//button[text()='Click for JS Confirm']")).click();
+		alert = driver.switchTo().alert();
+		Assert.assertEquals(alert.getText(), "I am a JS Confirm");
+		alert.dismiss();
+		Thread.sleep(2000);
+		Assert.assertTrue(driver.findElement(By.xpath("//p[@id='result' and text()='You clicked: Cancel']")).isDisplayed());
+	}
 	
+	@Test
+	public void TC_06_Prompt() {
+		driver.findElement(By.xpath("//button[text()='Click for JS Prompt']")).click();
+		alert = driver.switchTo().alert();
+		Assert.assertEquals(alert.getText(), "I am a JS prompt");
+		String text = "Thao Luu";
+		alert.sendKeys(text);
+		alert.accept();
+		Assert.assertTrue(driver.findElement(By.xpath("//p[@id='result' and text()='You entered: "+text+"']")).isDisplayed());
+	}
 	public void clickElementbyJavasript (By by) {
 		WebElement element = driver.findElement(by);
 		javascript.executeScript("arguments[0].click();", element);
