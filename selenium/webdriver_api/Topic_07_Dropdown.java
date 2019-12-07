@@ -38,7 +38,7 @@ public class Topic_07_Dropdown {
 		Assert.assertEquals("Manual Testing", select.getFirstSelectedOption().getText());
 		select.selectByIndex(9);
 		Assert.assertEquals("Functional UI Testing", select.getFirstSelectedOption().getText());
-		
+		//get all items trong list
 		int listJob1Number = select.getOptions().size();
 		Assert.assertEquals(10,listJob1Number);
 		
@@ -50,7 +50,7 @@ public class Topic_07_Dropdown {
 		Thread.sleep(3000);
 		List <WebElement> optionSelected = select.getAllSelectedOptions();
 		Assert.assertEquals(optionSelected.size(), 3);
-		
+		//lay text cua nhung items da chon
 		List <String> arraySelected = new ArrayList<String>();
 		for(WebElement list: optionSelected) {
 			arraySelected.add(list.getText());

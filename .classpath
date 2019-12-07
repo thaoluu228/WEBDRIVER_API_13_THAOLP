@@ -6,6 +6,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="libraries/selenium-server-standalone-2.53.1.jar"/>
+	<classpathentry kind="lib" path="libraries/selenium-server-standalone-2.53.1.jar" sourcepath="/Users/luuthao/eclipse-workspace/selenium-master.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
