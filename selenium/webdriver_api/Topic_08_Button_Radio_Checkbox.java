@@ -63,7 +63,7 @@ public class Topic_08_Button_Radio_Checkbox {
 		Assert.assertEquals(alert.getText(), "I am a JS Alert");
 		alert.accept();
 		Thread.sleep(2000);
-		Assert.assertTrue(driver.findElement(By.xpath("//p[@id='result' and text()='You clicked an alert successfully ']")).isDisplayed());
+		Assert.assertTrue(isElementDisplayed(By.xpath("//p[@id='result' and text()='You clicked an alert successfully ']")));
 	}
 	@Test
 	public void TC_05_CancelAlert() throws InterruptedException {
@@ -72,7 +72,7 @@ public class Topic_08_Button_Radio_Checkbox {
 		Assert.assertEquals(alert.getText(), "I am a JS Confirm");
 		alert.dismiss();
 		Thread.sleep(2000);
-		Assert.assertTrue(driver.findElement(By.xpath("//p[@id='result' and text()='You clicked: Cancel']")).isDisplayed());
+		Assert.assertTrue(isElementDisplayed(By.xpath("//p[@id='result' and text()='You clicked: Cancel']")));
 	}
 	
 	@Test
@@ -83,11 +83,14 @@ public class Topic_08_Button_Radio_Checkbox {
 		String text = "Thao Luu";
 		alert.sendKeys(text);
 		alert.accept();
-		Assert.assertTrue(driver.findElement(By.xpath("//p[@id='result' and text()='You entered: "+text+"']")).isDisplayed());
+		//Assert.assertTrue(driver.findElement(By.xpath("//p[@id='result' and text()='You entered: "+text+"']")).isDisplayed());
+		Assert.assertTrue(isElementDisplayed(By.xpath("//p[@id='result' and text()='You entered: "+text+"']")));
 	}
 	public void clickElementbyJavasript (By by) {
 		WebElement element = driver.findElement(by);
 		javascript.executeScript("arguments[0].click();", element);
+		
+		
 	}
 	
 	public boolean isElementSelected (By by) {
@@ -103,6 +106,15 @@ public class Topic_08_Button_Radio_Checkbox {
 	public boolean isElementEnabled (By by) {
 		WebElement element = driver.findElement(by);
 		if (element.isEnabled()) {
+			return true;
+		} else {
+			return false;
+
+		}
+	}
+	public boolean isElementDisplayed (By by) {
+		WebElement element = driver.findElement(by);
+		if (element.isDisplayed()) {
 			return true;
 		} else {
 			return false;
