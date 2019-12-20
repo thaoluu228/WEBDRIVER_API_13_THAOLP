@@ -91,7 +91,7 @@ public class Topic_09_UserInteraction {
 		Assert.assertEquals(driver.findElement(By.xpath("//p[@id='demo']")).getText(), "Hello Automation Guys!");
 		Thread.sleep(2000);
 	}
-	@Test
+	
 	public void TC_05_RightClick () {
 		driver.get("http://swisnl.github.io/jQuery-contextMenu/demo.html");
 		action.contextClick(driver.findElement(By.xpath("//span[@class='context-menu-one btn btn-neutral']"))).perform();
@@ -106,11 +106,12 @@ public class Topic_09_UserInteraction {
 		alert.accept();
 	}
 	@Test
-	public void TC_06_DragandDrop () {
+	public void TC_06_DragandDrop () throws InterruptedException {
 		driver.get("https://demos.telerik.com/kendo-ui/dragdrop/angular");
 		WebElement sourceCircle = driver.findElement(By.id("draggable"));
 		WebElement targetCircle = driver.findElement(By.id("droptarget"));
 		action.dragAndDrop(sourceCircle, targetCircle).perform();
+		Thread.sleep(2000);
 	}
 
 	@AfterClass
