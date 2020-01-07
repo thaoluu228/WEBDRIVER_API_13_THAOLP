@@ -8,6 +8,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -22,9 +23,12 @@ public class Topic_12_JavaExecutor {
 	@BeforeClass
 	public void beforeClass() {
 		String projectPath = System.getProperty("user.dir");
-		System.setProperty("webdriver.chrome.driver", projectPath + "/libraries/chromedriver");
+		System.setProperty("webdriver.gecko.driver", projectPath + "/libraries/geckodriver");
+		driver = new FirefoxDriver();
+		//String projectPath = System.getProperty("user.dir");
+		//System.setProperty("webdriver.chrome.driver", projectPath + "/libraries/chromedriver");
 		
-		driver = new ChromeDriver();
+		//driver = new ChromeDriver();
 		jsExecutor = (JavascriptExecutor) driver;
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
@@ -140,7 +144,7 @@ public class Topic_12_JavaExecutor {
 	}
 
 	@Test
-	public void TC_03_Create_Account() {
+	public void TC_03_Create_Account() throws InterruptedException {
 		String email = "thaoluu" + randomNumber() + "@yopmail.com";
 		navigateToUrlByJS("http://live.demoguru99.com/");
 		//click bang JS
@@ -156,8 +160,8 @@ public class Topic_12_JavaExecutor {
 		sendkeyToElementByJS("//input[@id='confirmation']", "12345678");
 		
 		clickToElementByJS("//span[text()='Register']");
-		
-		//verify text
+		Thread.sleep(2000);
+		//verifly text
 		String successText = (String) executeForBrowser("return document.documentElement.innerText;");
 		Assert.assertTrue(successText.contains("Thank you for registering with Main Website Store."));
 		

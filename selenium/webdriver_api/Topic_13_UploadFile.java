@@ -26,11 +26,11 @@ public class Topic_13_UploadFile {
 	@BeforeClass
 	public void beforeClass() {
 		//Firefox
-		//System.setProperty("webdriver.gecko.driver", projectPath + "/libraries/geckodriver");
-		//driver = new FirefoxDriver();
+		System.setProperty("webdriver.gecko.driver", projectPath + "/libraries/geckodriver");
+		driver = new FirefoxDriver();
 		//Chrome
-        System.setProperty("webdriver.chrome.driver", projectPath + "/libraries/chromedriver");
-		driver = new ChromeDriver();
+        //System.setProperty("webdriver.chrome.driver", projectPath + "/libraries/chromedriver");
+		//driver = new ChromeDriver();
 		
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
@@ -46,8 +46,9 @@ public class Topic_13_UploadFile {
 		Thread.sleep(2000);
 		
 		List <WebElement> startButton = driver.findElements(By.xpath("//table//button[@class='btn btn-primary start']"));
-		for (WebElement button: startButton)
+		for (WebElement button: startButton) {
 			button.click();
+		}	
 		Thread.sleep(2000);
 		Assert.assertTrue(driver.findElement(By.xpath("//a[text()='upload1.png']")).isDisplayed());
 		Assert.assertTrue(driver.findElement(By.xpath("//a[text()='upload2.png']")).isDisplayed());

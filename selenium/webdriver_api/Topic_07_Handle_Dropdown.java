@@ -8,6 +8,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -26,7 +27,12 @@ public class Topic_07_Handle_Dropdown {
 	
 	@BeforeClass
 	public void beforeClass() {
-		driver = new FirefoxDriver();
+		String projectPath = System.getProperty("user.dir");
+		System.setProperty("webdriver.chrome.driver", projectPath + "/libraries/chromedriver");
+		
+		driver = new ChromeDriver();
+		//System.setProperty("webdriver.gecko.driver", projectPath + "/libraries/geckodriver");
+		//driver = new FirefoxDriver();
 		waitExplicit = new WebDriverWait(driver, 10);
 		javascript = (JavascriptExecutor) driver;
 		action = new Actions(driver);
@@ -68,8 +74,10 @@ public class Topic_07_Handle_Dropdown {
 	}
 	
 	@Test
-	public void TC_04_Editable() {
-		inputIteminCustomDropdown("//div[@class='ui fluid search selection dropdown']", "//div[@class='ui active visible fluid search selection dropdown']//input[@class='search']", "Albania");
+	public void TC_04_Editable() throws InterruptedException {
+		driver.get("https://react.semantic-ui.com/maximize/dropdown-example-search-selection/");
+		Thread.sleep(2000);
+		inputIteminCustomDropdown("//div[@class='ui fluid search selection dropdown']", "//input[@class='search']", "Albania");
 		Assert.assertTrue(isDisplayed("//div[@class='text' and text()='Albania']"));
 	}
 	
@@ -130,6 +138,7 @@ public class Topic_07_Handle_Dropdown {
 	public String getTextbyJS(String locator) {
 		return (String) javascript.executeScript("return document.querySelector('" + locator + "').text");
 	}
+	
 
 	@AfterClass
 	public void afterClass() {
